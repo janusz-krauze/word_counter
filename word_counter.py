@@ -34,11 +34,9 @@ parser.add_argument('file_path', type=str, help='name of the file to be counted'
 
 args = parser.parse_args()
 
-n_lines = count_lines(args.file_path)
-n_words = count_words(args.file_path)
-n_chars = count_chars(args.file_path)
-
-print("Number of lines:", str(n_lines))
-print("Number of words:", str(n_words))
-print("Number of characters:", str(n_chars))
-
+try:
+    print("Number of lines:", str(count_lines(args.file_path)))
+    print("Number of words:", str(count_words(args.file_path)))
+    print("Number of characters:", str(count_chars(args.file_path)))
+except OSError:
+    print("File not found.")
