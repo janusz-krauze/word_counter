@@ -18,14 +18,14 @@ def count_chars(line):
     n_chars = len(line) + 1
     return(n_chars)
 
-def parse_args(params):
+def parse_args():
     parser = argparse.ArgumentParser(description='Count lines, words and characters.')
     parser.add_argument('file_path', type=str, help='name of the file to be counted')
     parser.add_argument('-l', dest= "lines", action="store_true", help='count lines')
     parser.add_argument('-c', dest= "characters", action="store_true", help='count chars')
     parser.add_argument('-w', dest= "words", action="store_true", help='count words')
 
-    args = parser.parse_args(params)
+    args = parser.parse_args()
     return(args)
 
 def open_file(file_path):
@@ -36,7 +36,7 @@ def open_file(file_path):
         return(False, 'File not found')
 
 if __name__ == '__main__':
-    args = parse_args('-l -w -c test_text.txt'.split())
+    args = parse_args()
     data_file = open_file(args.file_path)
     if data_file[0] == True:
         lines = 0
@@ -49,6 +49,7 @@ if __name__ == '__main__':
                 words += count_words(data_line)
             if args.characters:
                 chars += count_chars(data_line)
+        data_file[1].close()
         if args.lines:
             print("Number of lines: " + str(lines))
         if args.words:
@@ -57,3 +58,4 @@ if __name__ == '__main__':
             print("Number of characters: " + str(chars))
     else:
         print(data_file[1])
+
